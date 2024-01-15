@@ -3,6 +3,21 @@ import { useState } from "react";
 // import Nome from "./components/Nome";
 
 function App() {
+  //  ARRAY
+  const [input, setInput] = useState("");
+  const [tarefas, setTarefas] = useState([
+    "Pagar a conta de luz",
+    "Estudar React JS",
+  ]);
+
+  function handleRegisterTask(e) {
+    e.preventDefault();
+
+    setTarefas([...tarefas, input]);
+    setInput("");
+  }
+
+  // FORM
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [idade, setIdade] = useState(0);
@@ -59,7 +74,6 @@ function App() {
       </form>
 
       <br />
-      <br />
 
       <div>
         <span>Bem vindo: {user.nome}</span>
@@ -69,6 +83,34 @@ function App() {
         <span>Email: {user.email}</span>
         <br />
       </div>
+
+      <br />
+
+      {/* ARRAY */}
+      <h1>Cadastrando Tarefa</h1>
+
+      <form onSubmit={handleRegisterTask}>
+        <label>Nome da tarefa:</label>
+        <input
+          placeholder="Digite sua tarefa"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <br />
+
+        <button type="submit">Registrar</button>
+      </form>
+
+      <br />
+
+      <ul>
+        {tarefas.map((tarefa) => (
+          <li key={tarefa}>{tarefa}</li>
+        ))}
+      </ul>
+
+      <br />
+      <br />
 
       {/* USESTATE */}
       {/* <h1>React app</h1>
