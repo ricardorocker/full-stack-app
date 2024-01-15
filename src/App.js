@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // import Nome from "./components/Nome";
 
@@ -9,6 +9,20 @@ function App() {
     "Pagar a conta de luz",
     "Estudar React JS",
   ]);
+
+  // LIFE CICLE HOOK - ngOnInit
+  useEffect(() => {
+    const tarefasStorage = localStorage.getItem("@tarefa");
+
+    if (tarefasStorage) {
+      setTarefas(JSON.parse(tarefasStorage));
+    }
+  }, []);
+
+  // LIFE CICLE HOOK - ngOnChange(tarefas)
+  useEffect(() => {
+    localStorage.setItem("@tarefa", JSON.stringify(tarefas));
+  }, [tarefas]);
 
   function handleRegisterTask(e) {
     e.preventDefault();
